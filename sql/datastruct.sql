@@ -83,17 +83,16 @@ create table workout_fits (
   id serial,
   workout_summary_id int,
   altitude decimal(10, 2),
-  ascent decimal(10, 4),
-  descent decimal(10, 4),
   distance decimal(10, 2),
   enhanced_altitude decimal(10, 2),
   enhanced_speed decimal(10, 2),
   gps_accuracy int,
   grade decimal(10, 4),
-  position_lat decimal(10, 7),
-  position_long decimal(10, 7),
+  position_lat int,
+  position_long int,
   speed decimal(10, 4),
   temperature decimal(10, 2),
+  battery_soc decimal(10, 2),
   created_at timestamptz
 );
 
@@ -108,8 +107,6 @@ alter table workout_fits add constraint fk_workout_summary_id foreign key (worko
 comment on column workout_fits.id is '自增主键';
 comment on column workout_fits.workout_summary_id is '运动汇总信息表id';
 comment on column workout_fits.altitude is '海拔(米)';
-comment on column workout_fits.ascent is '爬升(米)';
-comment on column workout_fits.descent is '下降(米)';
 comment on column workout_fits.distance is '总距离(米)';
 comment on column workout_fits.enhanced_altitude is '最高海拔(米)';
 comment on column workout_fits.enhanced_speed is '最高速度(米/秒)';
@@ -119,5 +116,6 @@ comment on column workout_fits.position_lat is '纬度';
 comment on column workout_fits.position_long is '经度';
 comment on column workout_fits.speed is '速度(米/秒)';
 comment on column workout_fits.temperature is '温度(℃)';
+comment on column workout_fits.battery_soc is '电池电量(%)';
 comment on column workout_fits.created_at is '上传时间';
 comment on table workout_fits is '健康详细信息表';

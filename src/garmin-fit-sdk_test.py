@@ -6,18 +6,10 @@
 
 from garmin_fit_sdk import Decoder, Stream
 
-stream = Stream.from_file("../fits/2024-11-13-093727-ELEMNT_BOLT_81D0-128-0.fit")
+stream = Stream.from_file("../fits/2024-11-14-232358-ELEMNT_BOLT_81D0-131-0.fit")
 decoder = Decoder(stream)
-messages, errors = decoder.read(
-    apply_scale_and_offset=True,
-    convert_datetimes_to_dates=True,
-    convert_types_to_strings=True,
-    enable_crc_check=True,
-    expand_sub_fields=True,
-    expand_components=True,
-    merge_heart_rates=True,
-    mesg_listener=None
-)
+messages, errors = decoder.read(convert_datetimes_to_dates=False)
+record_message = messages.get('record_mesgs')
+for record in record_message:
+    print(record)
 
-print(errors)
-print(messages)
